@@ -1,20 +1,21 @@
 package com.madina.sampleapp.ui.main
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.madina.sampleapp.R
 import com.madina.sampleapp.domain.model.Movie
 import com.madina.sampleapp.ui.adapters.MainAdapter
+import com.madina.sampleapp.ui.moviedetail.MovieDetailActivity
 import com.madina.sampleapp.ui.utils.Status
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainAdapter.MovieListener {
 
     @Inject
     lateinit var viewModel: MainViewModel
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 (recyclerView.layoutManager as LinearLayoutManager).orientation
             )
         )
+        supportActionBar?.title = "New app"
     }
 
     private fun setupObservers() {
@@ -54,18 +56,20 @@ class MainActivity : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-//                        recyclerView.visibility = View.VISIBLE
-//                        progressBar.visibility = View.GONE
+                        recyclerView.visibility = View.VISIBLE
+                        progressBar.visibility = View.GONE
                         resource.data?.let { movies -> retrieveList(movies.results) }
+//                        resource.data?.let { movies -> main_text.text = movies.results[0].title }
                     }
-//                    Status.ERROR -> {
-//                        recyclerView.visibility = View.VISIBLE
-//                        progressBar.visibility = View.GONE
-//                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-//                    }
-//                    Status.LOADING -> {
-//                        progressBar.visibility = View.VISIBLE
-//                        recyclerView.visibility = View.GONE
+                    Status.ERROR -> {
+                        recyclerView.visibility = View.VISIBLE
+                        progressBar.visibility = View.GONE
+                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        progressBar.visibility = View.VISIBLE
+                        recyclerView.visibility = View.GONE
+                    }
                 }
             }
         })
@@ -76,5 +80,9 @@ class MainActivity : AppCompatActivity() {
             addData(users)
             notifyDataSetChanged()
         }
+    }
+
+    override fun onMovieClick(movie: Movie) {
+        startActivity(MovieDetailActivity.newInstance(this, movie.id))
     }
 }

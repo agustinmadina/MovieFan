@@ -1,8 +1,7 @@
 package com.madina.sampleapp.application
 
 import android.content.Context
-import com.madina.sampleapp.ui.utils.implementation.ImageHelperImpl
-import com.madina.sampleapp.ui.utils.interfaces.ImageHelper
+import com.madina.sampleapp.ui.utils.ImageUtils
 import dagger.Module
 import dagger.Provides
 
@@ -13,5 +12,5 @@ class AppModule {
     fun providesContext(application: SampleApp): Context = application.applicationContext
 
     @Provides
-    fun providesImageHelper(context: SampleApp): ImageHelper = ImageHelperImpl(context)
+    fun providesImageHelper(): ImageUtils = ImageUtils()
 }

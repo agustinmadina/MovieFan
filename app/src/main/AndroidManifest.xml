@@ -22,6 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.madina.sampleapp.ui.moviedetail.MovieDetailActivity"
+            android:parentActivityName="com.madina.sampleapp.ui.main.MainActivity" />
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.madina.sampleapp.domain.repository.implementation
 
+import com.madina.sampleapp.BuildConfig.API_KEY
 import com.madina.sampleapp.domain.repository.interfaces.MovieRepository
 import com.madina.sampleapp.networking.MovieService
 
@@ -15,7 +16,7 @@ class MovieRepositoryImpl(
 //
 //    override suspend fun getUpcomingMovies() = movieService.getUpcomingMovies(API_KEY)
 //
-//    override suspend fun getMovie(movieId: Int) = movieService.getMovie(movieId, API_KEY)
+    override suspend fun getMovie(movieId: Int) = movieService.getMovie(movieId, API_KEY)
 //
 //    override suspend fun searchMovie(query: String) = movieService.searchMovie(API_KEY, query)
 }
