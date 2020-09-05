@@ -1,5 +1,7 @@
 package com.madina.sampleapp.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -23,13 +25,13 @@ class MainActivity : AppCompatActivity(), MainAdapter.MovieListener {
     @Inject
     lateinit var adapter: MainAdapter
 
-//    companion object {
-//        fun newInstance(context: Context): Intent {
-//            val intent = Intent(context, MainActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-//            return intent
-//        }
-//    }
+    companion object {
+        fun newInstance(context: Context): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            return intent
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

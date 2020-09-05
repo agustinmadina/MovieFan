@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name="com.madina.sampleapp.ui.main.MainActivity"
+            android:name="com.madina.sampleapp.ui.splash.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +25,13 @@
         </activity>
 
         <activity
+            android:name="com.madina.sampleapp.ui.main.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name="com.madina.sampleapp.ui.moviedetail.MovieDetailActivity"
-            android:parentActivityName="com.madina.sampleapp.ui.main.MainActivity" />
+            android:parentActivityName="com.madina.sampleapp.ui.main.MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
