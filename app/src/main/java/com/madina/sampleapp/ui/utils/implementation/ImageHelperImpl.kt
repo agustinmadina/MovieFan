@@ -11,10 +11,17 @@ class ImageHelperImpl(val context: SampleApp) : ImageHelper {
         const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
     }
 
-    override fun loadImage(path: String, imageView: ImageView) {
+    override fun loadImageFromOtherRepo(path: String, imageView: ImageView) {
         Glide.with(context)
             .load("$IMAGE_BASE_URL$path")
-//            .placeholder(R.drawable.popcorn_placeholder)
+//            .placeholder(R.drawable.placeholder)
+            .into(imageView)
+    }
+
+    override fun loadImage(path: String, imageView: ImageView) {
+        Glide.with(context)
+            .load(path)
+//            .placeholder(R.drawable.placeholder)
             .into(imageView)
     }
 }

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.madina.sampleapp.R
 import com.madina.sampleapp.domain.model.Movie
 import com.madina.sampleapp.ui.utils.RuntimeScoped
@@ -45,7 +44,7 @@ class MainAdapter @Inject constructor(private val imageHelper: ImageHelper) :
         fun bind(movie: Movie) {
             itemView.textViewUserName.text = movie.title
             itemView.textViewUserEmail.text = movie.releaseDate
-            imageHelper.loadImage(movie.posterPath, itemView.imageViewAvatar)
+            imageHelper.loadImageFromOtherRepo(movie.posterPath, itemView.imageViewAvatar)
         }
     }
 }
