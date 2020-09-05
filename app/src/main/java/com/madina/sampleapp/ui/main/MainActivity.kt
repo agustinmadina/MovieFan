@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -46,7 +47,6 @@ class MainActivity : AppCompatActivity() {
                 (recyclerView.layoutManager as LinearLayoutManager).orientation
             )
         )
-        recyclerView.adapter = adapter
     }
 
     private fun setupObservers() {

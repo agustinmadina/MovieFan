@@ -1,6 +1,5 @@
 package com.madina.sampleapp.domain.repository.implementation
 
-import com.madina.sampleapp.BuildConfig.API_KEY
 import com.madina.sampleapp.domain.repository.interfaces.MovieRepository
 import com.madina.sampleapp.networking.MovieService
 

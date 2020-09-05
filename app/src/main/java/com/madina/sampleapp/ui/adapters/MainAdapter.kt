@@ -32,6 +32,7 @@ class MainAdapter @Inject constructor(private val imageHelper: ImageHelper) :
         this.items.apply {
             clear()
             addAll(users)
+            notifyDataSetChanged()
         }
     }
 
