@@ -1,6 +1,5 @@
 package com.madina.sampleapp.networking
 
-import androidx.annotation.Nullable
 import com.madina.sampleapp.domain.model.MovieDetail
 import com.madina.sampleapp.networking.response.MoviesResponse
 import retrofit2.http.GET
