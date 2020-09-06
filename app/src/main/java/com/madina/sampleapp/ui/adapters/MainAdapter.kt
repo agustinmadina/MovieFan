@@ -48,7 +48,7 @@ class MainAdapter @Inject constructor(private val listener: MovieListener) : Rec
         fun bind(movie: Movie) {
             itemView.textViewUserName.text = movie.title
             itemView.textViewUserEmail.text = movie.releaseDate
-            itemView.imageViewAvatar.loadImageFromOtherRepo(movie.posterPath)
+            movie.posterPath?.let { itemView.imageViewAvatar.loadImageFromOtherRepo(movie.posterPath) }
             itemView.setOnClickListener { listener.onMovieClick(movie) }
         }
     }

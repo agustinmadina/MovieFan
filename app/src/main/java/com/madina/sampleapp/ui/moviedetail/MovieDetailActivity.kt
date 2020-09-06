@@ -10,7 +10,6 @@ import com.madina.sampleapp.R
 import com.madina.sampleapp.ui.utils.Status
 import com.madina.sampleapp.ui.utils.loadImageFromOtherRepo
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_activity.main_text
 import kotlinx.android.synthetic.main.main_activity.progressBar
 import kotlinx.android.synthetic.main.movie_detail_activity.*
@@ -51,7 +50,7 @@ class MovieDetailActivity : AppCompatActivity() {
                         resource.data?.let { movie ->
                             main_text.text = movie.title
                             secondary_text.text = movie.overview
-                            movie_detail_thumb.loadImageFromOtherRepo((movie.posterPath))
+                            movie.posterPath?.let { movie_detail_thumb.loadImageFromOtherRepo((movie.posterPath)) }
                         }
                     }
                     Status.ERROR -> {

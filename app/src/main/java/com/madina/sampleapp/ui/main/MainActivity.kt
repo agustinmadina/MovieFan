@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.madina.sampleapp.R
 import com.madina.sampleapp.domain.model.Movie
+import com.madina.sampleapp.networking.response.MoviesResponse
 import com.madina.sampleapp.ui.adapters.MainAdapter
 import com.madina.sampleapp.ui.moviedetail.MovieDetailActivity
+import com.madina.sampleapp.ui.utils.Resource
 import com.madina.sampleapp.ui.utils.Status
+import com.madina.sampleapp.ui.utils.hideKeyboard
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
@@ -55,26 +58,36 @@ class MainActivity : AppCompatActivity(), MainAdapter.MovieListener {
 
     private fun setupObservers() {
         viewModel.getTopRatedMovies().observe(this, {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
-                        resource.data?.let { movies -> retrieveList(movies.results) }
-//                        resource.data?.let { movies -> main_text.text = movies.results[0].title }
-                    }
-                    Status.ERROR -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Status.LOADING -> {
-                        progressBar.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
-                    }
+            populateList(it)
+        })
+        search_icon.setOnClickListener {
+            viewModel.searchMovie(search_edit_text.text.toString()).observe(this, {
+                populateList(it)
+            })
+        }
+    }
+
+    private fun populateList(it: Resource<MoviesResponse>?) {
+        it?.let { resource ->
+            when (resource.status) {
+                Status.SUCCESS -> {
+                    recyclerView.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
+                    resource.data?.let { movies -> retrieveList(movies.results) }
+                    // resource.data?.let { movies -> main_text.text = movies.results[0].title }
+                }
+                Status.ERROR -> {
+                    recyclerView.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                }
+                Status.LOADING -> {
+                    progressBar.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
                 }
             }
-        })
+        }
+        hideKeyboard()
     }
 
     private fun retrieveList(users: List<Movie>) {

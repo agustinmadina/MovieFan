@@ -13,10 +13,10 @@ class MovieRepositoryImpl(
     override suspend fun getTopRatedMovies() = movieService.getTopRatedMovies(null)
 
 //    override suspend fun getPopularMovies() = movieService.getPopularMovies(API_KEY)
-//
+
 //    override suspend fun getUpcomingMovies() = movieService.getUpcomingMovies(API_KEY)
-//
+
     override suspend fun getMovie(movieId: Int) = movieService.getMovie(movieId, API_KEY)
-//
-//    override suspend fun searchMovie(query: String) = movieService.searchMovie(API_KEY, query)
+
+    override suspend fun searchMovie(query: String) = movieService.searchMovie(API_KEY, query)
 }

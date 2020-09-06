@@ -10,5 +10,5 @@ interface MovieRepository {
 //    suspend fun getPopularMovies(): MoviesResponse
 //    suspend fun getUpcomingMovies(): MoviesResponse
     suspend fun getMovie(movieId: Int): MovieDetail
-//    suspend fun searchMovie(query: String): MoviesResponse
+    suspend fun searchMovie(query: String): MoviesResponse
 }
