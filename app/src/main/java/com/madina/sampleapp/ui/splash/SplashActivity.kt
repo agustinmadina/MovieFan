@@ -1,15 +1,13 @@
 package com.madina.sampleapp.ui.splash
 
 import android.animation.Animator
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.animation.addListener
 import com.madina.sampleapp.R
 import com.madina.sampleapp.ui.main.MainActivity
+import com.madina.sampleapp.ui.utils.fullScreenMode
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
@@ -17,33 +15,24 @@ import kotlinx.android.synthetic.main.activity_splash.*
  */
 class SplashActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
         initUI()
     }
 
     private fun initUI() {
-//        fullScreenMode()
+        fullScreenMode()
+        splash_logo.animate().scaleX(4f).scaleY(4f)
+        moveViewRight(splash_logo)
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    }
 
-        window.decorView.setOnSystemUiVisibilityChangeListener { visibility ->
-            if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
-                // The system bars are visible.
-            } else {
-                // The system bars are NOT visible.
-            }
-        }
-
-
-        ObjectAnimator.ofFloat(splash_logo, "translationX", 100f).apply {
-            duration = 2000
-            addListener(object : Animator.AnimatorListener {
+    private fun moveViewRight(view: View) {
+        view.animate().translationX(1000f).apply {
+            duration = 5000
+            setListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator) {
-                    // 3
-                    Toast.makeText(applicationContext, "Doge took off", Toast.LENGTH_SHORT)
-                        .show()
                 }
 
                 override fun onAnimationEnd(animation: Animator) {
@@ -54,10 +43,7 @@ class SplashActivity : AppCompatActivity() {
 
                 override fun onAnimationRepeat(animation: Animator) {}
             })
-            start()
         }
-        // Enable ConstraintLayout to fit system windows
-        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
     fun showMoviesScreen() {
